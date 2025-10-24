@@ -10,11 +10,8 @@ As a developer, I can log every airdrop I request.
 
 As a developer, I can reset my tracker to 0 for the next testing day.
 
-If I don’t connect my wallet, I should not be able to interact with the tracker.
 
-
-Architectural Diagram
-
+![Architecture Diagram](./architecture.png)
 
 
 Getting Started
@@ -22,6 +19,7 @@ Getting Started
 Clone & Install Locally
 
 git clone https://github.com/Harshbhargav45/adv_task1.git
+
 cd adv_task1
 npm install
 
