@@ -1,4 +1,4 @@
-Devnet Sol Tracker
+⁸Devnet Sol Tracker
 
 A simple on-chain tracker for developers to log their daily devnet SOL usage.
 
@@ -11,7 +11,7 @@ As a developer, I can log every airdrop I request.
 As a developer, I can reset my tracker to 0 for the next testing day.
 
 
-![Architecture Diagram](./architecture.png)
+![Architecture Diagram](./Architecture.png)
 
 
 Getting Started
