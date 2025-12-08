@@ -2,59 +2,67 @@ use anchor_lang::prelude::*;
 
 declare_id!("4Lcp6CnKWi3Nsm52z2aeRstFe4V22KBGocLBDfvRiX1v");
 
-
-#[program] 
+#[program]
 pub mod devnet_sol_tracker {
     use super::*;
 
-    pub fn initialize_tracker(ctx: Context<InitializeTracker>, daily_goal: u64) -> Result<()> {
-        let tracker = &mut ctx.accounts.tracker;
-        tracker.daily_goal = daily_goal;
-        tracker.total_airdropped = 0;
+    pub fn initialize(ctx: Context<Initialize>) -> Result<()> {
+        let counter = &mut ctx.accounts.counter;
+        counter.count = 0;
+        counter.authority = ctx.accounts.authority.key();
         Ok(())
     }
 
-    pub fn log_airdrop(ctx: Context<LogAirdrop>, amount: u64) -> Result<()> {
-        let tracker = &mut ctx.accounts.tracker;
-        tracker.total_airdropped = tracker.total_airdropped.checked_add(amount).unwrap();
-        Ok(())
-    }
+    pub fn increment(ctx: Context<Increment>) -> Result<()> {
+        let counter = &mut ctx.accounts.counter;
+        
+        require!(
+            counter.authority == ctx.accounts.authority.key(),
+            ErrorCode::Unauthorized
+        );
 
-    pub fn reset_tracker(ctx: Context<ResetTracker>) -> Result<()> {
-        let tracker = &mut ctx.accounts.tracker;
-        tracker.total_airdropped = 0;
+        counter.count += 1;
         Ok(())
     }
 }
 
 #[derive(Accounts)]
-pub struct InitializeTracker<'info> {
-    #[account(mut)]
-    pub payer: Signer<'info>,
+pub struct Initialize<'info> {
     #[account(
         init,
-        space = 8 + DevTracker::INIT_SPACE,
-        payer = payer
+        payer = authority,
+        space = 8 + 8 + 32,
+        seeds = [b"counter", authority.key().as_ref()],
+        bump
     )]
-    pub tracker: Account<'info, DevTracker>,
+    pub counter: Account<'info, Counter>,
+
+    #[account(mut)]
+    pub authority: Signer<'info>,
+
     pub system_program: Program<'info, System>,
 }
 
 #[derive(Accounts)]
-pub struct LogAirdrop<'info> {
-    #[account(mut)]
-    pub tracker: Account<'info, DevTracker>,
-}
+pub struct Increment<'info> {
+    #[account(
+        mut,
+        seeds = [b"counter", authority.key().as_ref()],
+        bump
+    )]
+    pub counter: Account<'info, Counter>,
 
-#[derive(Accounts)]
-pub struct ResetTracker<'info> {
-    #[account(mut)]
-    pub tracker: Account<'info, DevTracker>,
+    pub authority: Signer<'info>,
 }
 
 #[account]
-#[derive(InitSpace)]
-pub struct DevTracker {
-    daily_goal: u64,
-    total_airdropped: u64,
+pub struct Counter {
+    pub count: u64,
+    pub authority: Pubkey,
+}
+
+#[error_code]
+pub enum ErrorCode {
+    #[msg("You are not authorized to increment this counter")]
+    Unauthorized,
 }

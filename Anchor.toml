@@ -1,11 +1,14 @@
-[toolchain]
-package_manager = "yarn"
-
 [features]
-resolution = true
+seeds = false
 skip-lint = false
 
+[workspace]
+members = ["programs/*"]
+
 [programs.devnet]
+devnet_sol_tracker = "4Lcp6CnKWi3Nsm52z2aeRstFe4V22KBGocLBDfvRiX1v"
+
+[programs.localnet]
 devnet_sol_tracker = "4Lcp6CnKWi3Nsm52z2aeRstFe4V22KBGocLBDfvRiX1v"
 
 [registry]
@@ -16,4 +19,4 @@ cluster = "devnet"
 wallet = "~/.config/solana/id.json"
 
 [scripts]
-test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 \"tests/**/*.ts\""
+test = "ts-mocha -p ./tsconfig.json -t 1000000 'tests/**/*.ts'"
