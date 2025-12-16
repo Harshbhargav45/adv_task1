@@ -1,39 +1,85 @@
-⁸Devnet Sol Tracker
+# 👍👎 Like / Dislike Counter – Solana Program
 
-A simple on-chain tracker for developers to log their daily devnet SOL usage.
+A simple **on-chain Like & Dislike Counter** built on the **Solana blockchain** using the **Anchor framework**.  
+This program allows users to **initialize a counter account**, **like**, and **dislike**, with all state stored **on-chain and verifiable**.
 
-User Stories
+This project is designed to demonstrate:
+- Anchor program structure
+- Account initialization and mutation
+- TypeScript client interaction
+- Real-world dApp patterns (social engagement)
 
-As a developer, I can initialize my personal tracker account with a daily SOL usage goal.
+---
 
-As a developer, I can log every airdrop I request.
+## 🚀 Features
 
-As a developer, I can reset my tracker to 0 for the next testing day.
+- Initialize a counter account
+- Increment likes
+- Increment dislikes
+- Fetch on-chain state
+- TypeScript test coverage using Anchor
+
+---
+
+## 🧑‍💻 User Stories
+
+### 1️⃣ As a user
+> I want to like a post so that my interaction is recorded on-chain and cannot be tampered with.
+
+### 2️⃣ As a user
+> I want to dislike a post so that I can express negative feedback transparently.
+
+### 3️⃣ As a developer
+> I want to store likes and dislikes on-chain so that the data is verifiable and censorship-resistant.
+
+### 4️⃣ As a frontend developer
+> I want to fetch the latest like/dislike counts from the blockchain and display them in the UI.
+
+### 5️⃣ As a protocol designer
+> I want a simple counter program that can later be extended to prevent double likes, add PDA-based accounts, or support per-post counters.
+
+---
+
+## 🏗 Architecture Diagram
+
+> 📌 **To be added later**
+
+<!--
+Architecture diagram will be added here.
+This section will contain a Mermaid / Excalidraw diagram showing:
+User → TypeScript Client → Anchor Program → Counter Account → Blockchain
+-->
+
+---
+
+## 🧱 Program Overview
+
+### On-chain State
+The program maintains a single on-chain account containing:
+- `likes: u64`
+- `dislikes: u64`
+
+### Instructions
+- `initialize` – Creates and initializes the counter account
+- `like` – Increments the like counter
+- `dislike` – Increments the dislike counter
+
+---
+
+## 🛠 Tech Stack
+
+- **Solana** – Blockchain
+- **Anchor** – Solana framework
+- **Rust** – On-chain program
+- **TypeScript** – Client & tests
+- **Mocha + ts-mocha** – Testing framework
+
+---
+
+## 🧪 Testing
+
+Tests are written in **TypeScript** using Anchor’s testing environment.
 
 
-![Architecture Diagram](./Architecture.png)
-
-
-Getting Started
-
-Clone & Install Locally
-
-git clone https://github.com/Harshbhargav45/adv_task1.git
-
-cd adv_task1
-npm install
-
-Anchor (Solana Program — Rust + Anchor)
-
-This is a Solana program written in Rust using the Anchor framework.
-
-Commands
-
-You can use any normal Anchor commands. Either move to the anchor directory and run the anchor command or prefix the command with npm.
-
-npm run setup              # Sync program ID (declare_id)
-npm run anchor-build       # Build the program
-npm run anchor-localnet    # Start local validator with program deployed
-npm run anchor-test        # Run tests
-npm run anchor deploy --provider.cluster devnet   # Deploy to Devnet
-
+```bash
+anchor test
