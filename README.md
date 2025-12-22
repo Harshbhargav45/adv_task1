@@ -1,4 +1,4 @@
-# 👍👎 Like / Dislike Counter – Solana Program
+# Like / Dislike Counter – Solana Program
 
 A simple **on-chain Like & Dislike Counter** built on the **Solana blockchain** using the **Anchor framework**.  
 This program allows users to **initialize a counter account**, **like**, and **dislike**, with all state stored **on-chain and verifiable**.
@@ -21,7 +21,7 @@ This project is designed to demonstrate:
 
 ---
 
-## 🧑‍💻 User Stories
+##  User Stories
 
 ### 1️⃣ As a user
 > I want to like a post so that my interaction is recorded on-chain and cannot be tampered with.
@@ -37,18 +37,6 @@ This project is designed to demonstrate:
 
 ### 5️⃣ As a protocol designer
 > I want a simple counter program that can later be extended to prevent double likes, add PDA-based accounts, or support per-post counters.
-
----
-
-## 🏗 Architecture Diagram
-
-> 📌 **To be added later**
-
-<!--
-Architecture diagram will be added here.
-This section will contain a Mermaid / Excalidraw diagram showing:
-User → TypeScript Client → Anchor Program → Counter Account → Blockchain
--->
 
 ---
 
